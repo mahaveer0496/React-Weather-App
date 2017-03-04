@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "sync": "browser-sync start --server --files \"public/bundle.js, public/index.html\"",
-    "start": "webpack -w"
+    "start": "node server.js",
+    "webpack" : "webpack -w"
   },
   "author": "kalu",
   "license": "MIT",
