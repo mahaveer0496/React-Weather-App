@@ -25625,7 +25625,7 @@
 	         React.createElement('input', { type: 'text', ref: 'location', placeholder: 'Enter City' }),
 	         React.createElement(
 	            'button',
-	            null,
+	            { className: 'button' },
 	            'Get Weather'
 	         )
 	      );
