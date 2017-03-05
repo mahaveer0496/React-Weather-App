@@ -22,18 +22,12 @@ var WeatherForm = React.createClass({
    }
 });
 
-var WeatherMessage = React.createClass({
-   getDefaultProps: function () {
-      return {
-         weather: 'this is default message'
-      }
-   },
-   render: function () {
-      return (
-         <p>the location is {this.props.location} and temp is {this.props.temp}</p>
-      )
-   }
-});
+var WeatherMessage = function (props) {
+   return (
+      <p>the location is {props.location} and temp is {props.temp}</p>
+   )
+};
+
 
 var Weather = React.createClass({
    getInitialState: function () {
@@ -49,15 +43,15 @@ var Weather = React.createClass({
          that.setState({
             location: location,
             temp: temp,
-            isLoading: false 
+            isLoading: false
          })
       }, function (errorMessage) {
-         that.setState({isLoading: false})
+         that.setState({ isLoading: false })
          alert(errorMessage)
       })
    },
    render: function () {
-      var {isLoading, temp, location} = this.state;
+      var { isLoading, temp, location } = this.state;
       function renderMessage() {
          if (isLoading) {
             return <h3>Fetching Weather....</h3>

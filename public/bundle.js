@@ -25428,23 +25428,19 @@
 	var Nav = __webpack_require__(223);
 	var Weather = __webpack_require__(224);
 
-	var Main = React.createClass({
-	   displayName: 'Main',
-
-	   render: function render() {
-	      return React.createElement(
-	         'div',
+	var Main = function Main(props) {
+	   return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(Nav, null),
+	      React.createElement(
+	         'h2',
 	         null,
-	         React.createElement(Nav, null),
-	         React.createElement(
-	            'h2',
-	            null,
-	            'Main Component'
-	         ),
-	         this.props.children
-	      );
-	   }
-	});
+	         'Main Component'
+	      ),
+	      props.children
+	   );
+	};
 
 	module.exports = Main;
 
@@ -25529,25 +25525,16 @@
 	   }
 	});
 
-	var WeatherMessage = React.createClass({
-	   displayName: 'WeatherMessage',
-
-	   getDefaultProps: function getDefaultProps() {
-	      return {
-	         weather: 'this is default message'
-	      };
-	   },
-	   render: function render() {
-	      return React.createElement(
-	         'p',
-	         null,
-	         'the location is ',
-	         this.props.location,
-	         ' and temp is ',
-	         this.props.temp
-	      );
-	   }
-	});
+	var WeatherMessage = function WeatherMessage(props) {
+	   return React.createElement(
+	      'p',
+	      null,
+	      'the location is ',
+	      props.location,
+	      ' and temp is ',
+	      props.temp
+	   );
+	};
 
 	var Weather = React.createClass({
 	   displayName: 'Weather',
@@ -27132,17 +27119,13 @@
 
 	var React = __webpack_require__(1);
 
-	var About = React.createClass({
-	    displayName: 'About',
-
-	    render: function render() {
-	        return React.createElement(
-	            'h3',
-	            null,
-	            'About Component'
-	        );
-	    }
-	});
+	var About = function About(props) {
+	    return React.createElement(
+	        'h3',
+	        null,
+	        'About Component'
+	    );
+	};
 
 	module.exports = About;
 
@@ -27154,17 +27137,13 @@
 
 	var React = __webpack_require__(1);
 
-	var Examples = React.createClass({
-	    displayName: 'Examples',
-
-	    render: function render() {
-	        return React.createElement(
-	            'h3',
-	            null,
-	            'Examples Component'
-	        );
-	    }
-	});
+	var Examples = function Examples(props) {
+	    return React.createElement(
+	        'h3',
+	        null,
+	        'Examples'
+	    );
+	};
 
 	module.exports = Examples;
 
