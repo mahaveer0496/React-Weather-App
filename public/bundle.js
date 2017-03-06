@@ -25604,6 +25604,7 @@
 
 	var React = __webpack_require__(8);
 	var openWeatherMap = __webpack_require__(232);
+	var ErrorModal = __webpack_require__(264);
 
 	var WeatherForm = React.createClass({
 	   displayName: 'WeatherForm',
@@ -25654,23 +25655,29 @@
 	   handleSearch: function handleSearch(location) {
 	      var that = this;
 
-	      this.setState({ isLoading: true });
+	      this.setState({
+	         isLoading: true,
+	         errorMessage: undefined
+	      });
 	      openWeatherMap.getTemp(location).then(function (temp) {
 	         that.setState({
 	            location: location,
 	            temp: temp,
 	            isLoading: false
 	         });
-	      }, function (errorMessage) {
-	         that.setState({ isLoading: false });
-	         alert(errorMessage);
+	      }, function (e) {
+	         that.setState({
+	            isLoading: false,
+	            errorMessage: e.message
+	         });
 	      });
 	   },
 	   render: function render() {
 	      var _state = this.state,
 	          isLoading = _state.isLoading,
 	          temp = _state.temp,
-	          location = _state.location;
+	          location = _state.location,
+	          errorMessage = _state.errorMessage;
 
 	      function renderMessage() {
 	         if (isLoading) {
@@ -25683,6 +25690,12 @@
 	            return React.createElement(WeatherMessage, { location: location, temp: temp });
 	         }
 	      }
+
+	      function renderError() {
+	         if (typeof errorMessage === 'string') {
+	            return React.createElement(ErrorModal, { message: errorMessage });
+	         }
+	      }
 	      return React.createElement(
 	         'div',
 	         null,
@@ -25692,6 +25705,7 @@
 	            'Hello from Weather'
 	         ),
 	         React.createElement(WeatherForm, { onSearch: this.handleSearch }),
+	         renderError(),
 	         renderMessage()
 	      );
 	   }
@@ -27226,7 +27240,7 @@
 
 	var React = __webpack_require__(8);
 
-	var About = function About(props) {
+	var About = function About() {
 	   return React.createElement(
 	      "div",
 	      null,
@@ -27675,6 +27689,64 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
+
+/***/ },
+/* 264 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	var React = __webpack_require__(8);
+
+	var ErrorModal = React.createClass({
+	   displayName: 'ErrorModal',
+
+	   getDefaultProps: function getDefaultProps() {
+	      return {
+	         title: 'Error'
+	      };
+	   },
+	   propTypes: {
+	      title: React.PropTypes.string,
+	      message: React.PropTypes.string.isRequired
+	   },
+	   componentDidMount: function componentDidMount() {
+	      var modal = new Foundation.Reveal($('#error-modal'));
+	      modal.open();
+	   },
+	   render: function render() {
+	      var _props = this.props,
+	          title = _props.title,
+	          message = _props.message;
+
+	      return React.createElement(
+	         'div',
+	         { id: 'error-modal', className: 'reveal tiny text-center', 'data-reveal': '' },
+	         React.createElement(
+	            'h4',
+	            null,
+	            title
+	         ),
+	         React.createElement(
+	            'p',
+	            null,
+	            message
+	         ),
+	         React.createElement(
+	            'p',
+	            null,
+	            React.createElement(
+	               'button',
+	               { className: 'button hollow', 'data-close': true },
+	               'Okay'
+	            )
+	         )
+	      );
+	   }
+	});
+
+	module.exports = ErrorModal;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }
 /******/ ]);
